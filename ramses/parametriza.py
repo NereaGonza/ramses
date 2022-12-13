@@ -9,11 +9,7 @@ from prm import *
 #exec(open('ramses/util.py').read())
 #exec(open('ramses/prm.py').read())
 
-<<<<<<< HEAD
-def parametriza(dirPrm, dirSen, *guiSen,funcPrm = lambda x:x):
-=======
 def parametriza(dirPrm, dirSen, *guiSen, funcPrm = lambda x:x):
->>>>>>> 01e7c33cb4693912b4371aa740f2907b2be42030
     """
     Lee las señales indicadas por 'dirSen', 'guiSen' y 'extSen', y escribe la señal
     parametrizada en el directorio 'dirPrm'.
