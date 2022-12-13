@@ -29,11 +29,38 @@ DIR_REC=$DIR_WORK/Rec/$NOM
 LIS_MOD=$DIR_WORK/Lis/vocales.lis 
 FIC_RES=$DIR_WORK/Res/$NOM.Res
 [ -d $(dirname $FIC_RES) ] || mkdir -p $(dirname $FIC_RES)
- #variables 
+ #variables parametriza
+FUNC_PRM=trivial
+EXEC_PRE=$DIR_PRM/$FUNC_PRM.py
+[ -d $(dirname $EXEC_PRE) ] || mkdir -p $(dirname $EXEC_PRE)
+execPre="-x $EXEC_PRE"
+funcPrm="-f $FUNC_PRM"
+echo "def $FUNC_PRM (x):" | tee $EXEC_PRE 
+echo "  return x" | tee -a $EXEC_PRE
+
+FUNC_PRM=fft
+EXEC_PRE=$DIR_PRM/$FUNC_PRM.py
+[ -d $(dirname $EXEC_PRE) ] || mkdir -p $(dirname $EXEC_PRE)
+execPre="-x $EXEC_PRE"
+funcPrm="-f $FUNC_PRM"
+echo "import numpy as np" | tee $EXEC_PRE
+echo "def $FUNC_PRM (x):" | tee -a $EXEC_PRE 
+echo "  return np.fft.fft(x)" | tee -a $EXEC_PRE
+
+FUNC_PRM=pdgm
+EXEC_PRE=$DIR_PRM/$FUNC_PRM.py
+[ -d $(dirname $EXEC_PRE) ] || mkdir -p $(dirname $EXEC_PRE)
+execPre="-x $EXEC_PRE"
+funcPrm="-f $FUNC_PRM"
+echo "import numpy as np" | tee $EXEC_PRE
+echo "def $FUNC_PRM (x):" | tee -a $EXEC_PRE 
+echo "  return np.abs(np.fft.fft(x))**2" | tee -a $EXEC_PRE
+
 dirSen="-s $DIR_SEN"
 dirPrm="-p $DIR_PRM"
-EXEC="parametriza.py $dirSen $dirPrm $GUI_ENT $GUI_REC"
+EXEC="parametriza.py $dirSen $dirPrm $execPre $funcPrm $GUI_ENT $GUI_REC"
 $PAR && echo $EXEC && $EXEC || exit 1
+
 #ENTRENO
 dirMar="-a $DIR_MAR"
 dirPrm="-p $DIR_PRM"
