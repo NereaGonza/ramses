@@ -70,6 +70,6 @@ Parametrización trivial:
         for script in scripts.split(','):
             exec(open(script).read())
     
-    funcPrm =eval(args['--funcPrm']) if args['--funcPrm'] else lambda x:x
+    funcPrm=eval(args['--funcPrm']) if args['--funcPrm'] else lambda x:x
 
     parametriza(dirPrm, dirSen, *guiSen, funcPrm=funcPrm)
